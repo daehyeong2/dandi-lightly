@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lightly KIOSK</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <header>
+    <img class="logo" src="/medias/lightly.png" alt="logo" />
+  </header>
+  <main>
+    <aside>
+      <h2>종류</h2>
+      <ul class="menu">
+        <a href="#" class="current">세트메뉴</a>
+        <a href="#">사이드메뉴</a>
+        <a href="#">음료수</a>
+      </ul>
+    </aside>
+    <ul class="products">
+      <li th:each="product : ${products}">
+        <img th:src="${product.image}" th:alt="${product.name}" />
+        <div>
+          <h3 th:text="${product.name}">상품 이름</h3>
+          <p th:text="${product.price} + '원'">상품 가격</p>
+        </div>
+      </li>
+    </ul>
+  </main>
+  <footer>
+    <p>© Lightly KIOSK 2025</p>
+  </footer>
+</body>
+</html>
