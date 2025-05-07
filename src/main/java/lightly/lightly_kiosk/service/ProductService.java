@@ -15,7 +15,16 @@ public class ProductService {
     this.productRepository = productRepository;
   }
 
+  public Long save(Product product) {
+    productRepository.save(product);
+    return product.getId();
+  }
+
   public List<Product> findAll() {
     return productRepository.findAll();
+  }
+
+  public List<Product> findByCategoryId(Long categoryId) {
+    return productRepository.findByCategoryId(categoryId);
   }
 }

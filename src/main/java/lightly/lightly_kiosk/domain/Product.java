@@ -1,5 +1,6 @@
 package lightly.lightly_kiosk.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ public class Product {
   private String description;
   private String image;
   private Long price;
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.REMOVE)
   private Category category;
 
   public Long getId() {

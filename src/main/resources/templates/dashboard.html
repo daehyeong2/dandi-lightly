@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <script src="/js/dashboard.js"></script>
+</head>
+<body>
+  <header>
+    <a href="/">
+      <img class="logo" src="/medias/lightly.png" alt="logo" />
+    </a>
+    <a class="admin-dashboard" href="/dashboard">Admin Dashboard</a>
+  </header>
+  <main>
+    <h1>Admin Dashboard</h1>
+    <div class="container">
+      <aside>
+        <h2>종류</h2>
+        <ul class="menu">
+          <a th:each="category : ${categories}" th:href="'/dashboard?categoryId=' + ${category.id}" th:class="${categoryId == category.id ? 'current' : ''}" th:text="${category.name}">카테고리 이름</a>
+        </ul>
+        <button id="category-create">만들기</button>
+      </aside>
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>상품 이름</td>
+            <td>상품 설명</td>
+            <td>가격</td>
+            <td>이미지</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="product : ${products}">
+            <td th:text="${product.id}">ID</td>
+            <td th:text="${product.name}">상품 이름</td>
+            <td th:text="${product.description}">상품 설명</td>
+            <td th:text="${product.price}">가격</td>
+            <td th:text="${product.image}">이미지</td>
+          </tr>
+        </tbody>
+      </table>
+      <button th:style="${categoryId == null ? 'display: none' : ''}" id="product-create">
+        상품 추가
+      </button>
+    </div>
+  </main>
+  <footer>
+    <p>© Lightly KIOSK 2025</p>
+  </footer>
+</body>
+</html>
