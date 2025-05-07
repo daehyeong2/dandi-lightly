@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -85,6 +86,38 @@ public class ProductController {
       Optional<Category> category = categoryService.findById(form.getCategoryId());
       if(category.isEmpty()) return new ResponseEntity<>("카테고리가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
       product.setCategory(category.get());
+
+      productService.save(product);
+      return new ResponseEntity<>("성공적으로 상품을 생성했습니다.", HttpStatus.OK);
+    } catch(Error e){
+      return new ResponseEntity<>("상품을 생성하는 중 에러가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @PatchMapping("/products/edit")
+  public ResponseEntity<String> editProduct(ProductEditForm form){
+    try {
+      Optional<Product> product_res = productService.findById(form.getId());
+      if(product_res.isEmpty()) return new ResponseEntity<>("존재하지 않는 상품입니다.", HttpStatus.NOT_FOUND);
+      Product product = product_res.get();
+      product.setId(form.getId());
+      if(form.getName().isPresent()){
+        product.setName(form.getName().get());
+      }
+      if(form.getDescription().isPresent()){
+        product.setDescription(form.getDescription().get());
+      }
+      if(form.getPrice().isPresent()){
+        product.setPrice(form.getPrice().get());
+      }
+      if(form.getImage().isPresent()){
+        product.setImage(form.getImage().get());
+      }
+      if(form.getCategoryId().isPresent()){
+        Optional<Category> category = categoryService.findById(form.getCategoryId().get());
+        if(category.isEmpty()) return new ResponseEntity<>("카테고리가 존재하지 않습니다.", HttpStatus.NOT_FOUND);
+        product.setCategory(category.get());
+      }
 
       productService.save(product);
       return new ResponseEntity<>("성공적으로 상품을 생성했습니다.", HttpStatus.OK);

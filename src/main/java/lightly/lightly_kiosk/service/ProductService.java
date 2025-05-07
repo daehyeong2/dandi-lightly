@@ -1,6 +1,7 @@
 package lightly.lightly_kiosk.service;
 
 import java.util.List;
+import java.util.Optional;
 import lightly.lightly_kiosk.domain.Product;
 import lightly.lightly_kiosk.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class ProductService {
 
   public List<Product> findAll() {
     return productRepository.findAll();
+  }
+
+  public Optional<Product> findById(Long id) {
+    return productRepository.findById(id);
   }
 
   public List<Product> findByCategoryId(Long categoryId) {

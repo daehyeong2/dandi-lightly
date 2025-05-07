@@ -35,8 +35,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="product : ${products}">
-            <td th:text="${product.id}">ID</td>
+          <tr th:each="product : ${products}" class="product">
+            <td th:text="${product.id}" class="product-id">ID</td>
             <td th:text="${product.name}">상품 이름</td>
             <td th:text="${product.description}">상품 설명</td>
             <td th:text="${product.price}">가격</td>

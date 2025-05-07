@@ -104,3 +104,7 @@ td {
   cursor: pointer;
   background-color: #008bff;
 }
+
+.product:hover {
+  cursor: pointer;
+}
